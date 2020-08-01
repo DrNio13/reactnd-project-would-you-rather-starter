@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { handleQuestionsInitialData } from '../../actions/questions'
 import { WouldYourRatherCard } from '../WouldYouRatherCard';
 
 export const Home = (props) => {
-    const [activeTab, setActiveTab] = useState('answered')
+    const [activeTab, setActiveTab] = useState('unanswered')
     const [answeredIds, setAnsweredIds] = useState([])
 
     useEffect(() => {
         // execute dispatch once
-        props.dispatch(handleQuestionsInitialData())
         setAnsweredIds(Object.keys(props.users[props.authedUser].answers))
     }, []) // eslint-disable-line
 

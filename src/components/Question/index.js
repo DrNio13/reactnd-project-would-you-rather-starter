@@ -68,4 +68,13 @@ const Question = (props) => {
     </div>
 }
 
-export default connect()(Question)
+function mapStateToProps({ users, authedUser, questions }) {
+    return {
+        users,
+        questions,
+        authedUser: authedUser
+    }
+}
+
+
+export default connect(mapStateToProps)(Question)

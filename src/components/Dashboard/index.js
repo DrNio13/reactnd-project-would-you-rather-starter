@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     Switch,
     Route,
@@ -11,9 +11,14 @@ import Question from '../../components/Question';
 import NewQuestion from '../NewQuestion';
 import { Home } from '../Home';
 import LeaderBoard from '../LeaderBoard';
+import { handleQuestionsInitialData } from '../../actions/questions';
 
 const Dashboard = (props) => {
     let location = useLocation();
+
+    useEffect(() => {
+        props.dispatch(handleQuestionsInitialData())
+    }, []); // eslint-disable-line
 
     return props.authedUser ? <div>
         <Menu authedUser={props.users[props.authedUser]['name']} />
@@ -25,7 +30,7 @@ const Dashboard = (props) => {
                 <NewQuestion authedUser={props.authedUser} />
             </Route>
             <Route exact path="/dashboard/questions/:questionId">
-                <Question dispatch={props.dispatch} users={props.users} authedUser={props.authedUser} questions={props.questions} />
+                <Question />
             </Route>
             <Route exact path='/dashboard/leaderboard'>
                 <LeaderBoard />
