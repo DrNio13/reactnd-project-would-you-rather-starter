@@ -37,7 +37,7 @@ const NewQuestion = (props) => {
                     </label>
                 </div>
 
-                <button onClick={handleSubmit} className="btn btn-primary" value="Submit" >Submit</button>
+                <button disabled={!optionOne || !optionTwo} onClick={handleSubmit} className="btn btn-primary" value="Submit" >Submit</button>
 
                 {success && <div className='alert alert-success'>Question saved!</div>}
 

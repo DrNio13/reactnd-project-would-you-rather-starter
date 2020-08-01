@@ -17,8 +17,6 @@ const Login = (props) => {
     setSubmitted(true)
   }
 
-  console.log(0, location)
-
   return Object.keys(props.users).length ?
     <form onSubmit={handleSubmit} className='form-group'>
       <h3>Welcome to the Would you rather game!</h3>
@@ -36,7 +34,6 @@ const Login = (props) => {
       <button disabled={!userId} type="submit" onClick={handleSubmit} className="btn btn-primary">Submit</button>
 
       {submitted && <Redirect to={`${location.hash ? location.hash.split('#')[1] : '/dashboard'}`} />}
-
     </form> : null
 }
 

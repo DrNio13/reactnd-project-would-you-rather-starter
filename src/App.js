@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 import { connect } from 'react-redux';
 import './App.css';
@@ -25,13 +26,16 @@ function App(props) {
             <Login />
           </Route>
           <Route exact path="/login">
-            <Login />
+            <Redirect to='/' />
           </Route>
           <Route path='/dashboard'>
             <Dashboard />
           </Route>
           <Route path="/logout">
             <Logout />
+          </Route>
+          <Route path="/404">
+            <NoMatch />
           </Route>
           <Route path="*">
             <NoMatch />
