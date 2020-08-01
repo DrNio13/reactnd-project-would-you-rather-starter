@@ -1,17 +1,20 @@
 import React from 'react'
 import {
     Switch,
-    Route
+    Route,
+    Redirect,
+    useLocation
 } from "react-router-dom";
 import { connect } from 'react-redux';
 import { Menu } from '../Menu';
-import { Redirect } from 'react-router';
 import Question from '../../components/Question';
 import NewQuestion from '../NewQuestion';
 import { Home } from '../Home';
 import LeaderBoard from '../LeaderBoard';
 
 const Dashboard = (props) => {
+    let location = useLocation();
+
     return props.authedUser ? <div>
         <Menu authedUser={props.users[props.authedUser]['name']} />
         <Switch>
@@ -29,7 +32,7 @@ const Dashboard = (props) => {
             </Route>
         </Switch>
 
-    </div> : <Redirect to='/'></Redirect>
+    </div> : <Redirect to={`/#${location.pathname}`} />
 }
 
 function mapStateToProps({ users, authedUser, questions }) {

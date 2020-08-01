@@ -24,7 +24,10 @@ function App(props) {
           <Route exact path="/">
             <Login />
           </Route>
-          <Route path="/dashboard">
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route path='/dashboard'>
             <Dashboard />
           </Route>
           <Route path="/logout">

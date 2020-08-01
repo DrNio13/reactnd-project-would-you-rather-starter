@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../../actions/authedUser';
-import { Redirect } from 'react-router';
+import { Redirect, useLocation } from 'react-router-dom';
 
 const Login = (props) => {
+  const location = useLocation();
   const [userId, setUserId] = useState();
   const [submitted, setSubmitted] = useState(false)
   const handleChange = (event) => {
@@ -15,6 +16,8 @@ const Login = (props) => {
     props.dispatch(setAuthedUser(userId));
     setSubmitted(true)
   }
+
+  console.log(0, location)
 
   return Object.keys(props.users).length ?
     <form onSubmit={handleSubmit} className='form-group'>
@@ -31,7 +34,9 @@ const Login = (props) => {
         </label>
       </div>
       <button disabled={!userId} type="submit" onClick={handleSubmit} className="btn btn-primary">Submit</button>
-      {submitted && <Redirect to="/dashboard" />}
+
+      {submitted && <Redirect to={`${location.hash ? location.hash.split('#')[1] : '/dashboard'}`} />}
+
     </form> : null
 }
 
