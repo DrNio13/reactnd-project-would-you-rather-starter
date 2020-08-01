@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { handleSaveQuestionAnswer } from '../../actions/questions';
 
 const Question = (props) => {
+    const { authedUser } = props;
     const { questionId } = useParams();
     const [checkedOption, setCheckedOption] = useState(false);
     const [submitted, setSubmitted] = useState(false);
@@ -26,19 +27,19 @@ const Question = (props) => {
     }
 
     return <div className='card'>
-        {submitted || props.users[author]['answers'][questionId] ? <div className='card-body'>
+        {submitted || props.users[authedUser]['answers'][questionId] ? <div className='card-body'>
             <div className="card-title">Asked by {props.users[author]['name']}</div>
             {props.users[author]['avatarURL'] ? <img src={props.users[author]['avatarURL']} className='img-thumbnail' alt='avatar' /> : ''}
 
             <div>
                 <h3>Results</h3>
 
-                <div className={`${checkedOption === 'optionOne' ? 'alert alert-success' : ''} ${props.users[author]['answers'][questionId] === 'optionOne' ? 'alert alert-success' : ''}`}>
+                <div className={`${checkedOption === 'optionOne' ? 'alert alert-success' : ''} ${props.users[authedUser]['answers'][questionId] === 'optionOne' ? 'alert alert-success' : ''}`}>
                     Would you rather {optionOne.text}? {checkedOption === 'optionOne' ? '(Your vote)' : ''}
                     <div>Votes: {optionOne.votes.length}</div>
                     Percentage: {(optionOne.votes.length / (optionOne.votes.length + optionTwo.votes.length)) * 100}%
                 </div>
-                <div className={`${checkedOption === 'optionTwo' ? 'alert alert-success' : ''} ${props.users[author]['answers'][questionId] === 'optionTwo' ? 'alert alert-success' : ''}`}>
+                <div className={`${checkedOption === 'optionTwo' ? 'alert alert-success' : ''} ${props.users[authedUser]['answers'][questionId] === 'optionTwo' ? 'alert alert-success' : ''}`}>
                     Would you rather {optionTwo.text}? {checkedOption === 'optionTwo' ? '(Your vote)' : ''}
                     <div>Votes: {optionTwo.votes.length}</div>
                     Percentage: {(optionTwo.votes.length / (optionOne.votes.length + optionTwo.votes.length)) * 100}%
